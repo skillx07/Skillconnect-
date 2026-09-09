@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SkillConnect | SIH 2026</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f3f7ff;
+ color:#172033;
+ padding-bottom:75px;
+}
+
+.container{
+ max-width:720px;
+ margin:auto;
+ padding:16px;
+}
+
+.card{
+ background:#fff;
+ border-radius:22px;
+ padding:22px;
+ margin-bottom:15px;
+ box-shadow:0 6px 25px #0001;
+}
+
+.hide{display:none!important}
+
+h1{
+ text-align:center;
+ color:#2864df;
+}
+
+h2{text-align:center}
+
+p{color:#667085}
+
+button{
+ width:100%;
+ padding:14px;
+ margin:7px 0;
+ border:0;
+ border-radius:12px;
+ background:#2864df;
+ color:white;
+ font-size:16px;
+ font-weight:bold;
+}
+
+.back{
+ background:#edf3ff;
+ color:#2864df;
+}
+
+.success{background:#20a05a}
+.danger{background:#e74c3c}
+.warning{background:#f39c12}
+
+input,select,textarea{
+ width:100%;
+ padding:14px;
+ margin:7px 0 14px;
+ border:1px solid #ccd5e3;
+ border-radius:12px;
+ font-size:16px;
+}
+
+.role{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.role button{margin:0}
+
+.active{
+ background:#2864df;
+ color:white;
+}
+
+.inactive{
+ background:#edf3ff;
+ color:#2864df;
+}
+
+.category-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin:15px 0;
+}
+
+.category{
+ padding:16px 5px;
+ border-radius:15px;
+ background:#f3f7ff;
+ border:1px solid #dce5f2;
+ text-align:center;
+ font-weight:bold;
+ cursor:pointer;
+}
+
+.category span{
+ display:block;
+ font-size:28px;
+ margin-bottom:5px;
+}
+
+.worker,.booking{
+ padding:16px;
+ margin:12px 0;
+ border-radius:15px;
+ background:#f8faff;
+ border:1px solid #e1e7f2;
+}
+
+.badge{
+ display:inline-block;
+ padding:6px 10px;
+ border-radius:20px;
+ background:#eaf1ff;
+ color:#2864df;
+ font-weight:bold;
+}
+
+.ok{
+ background:#e8f8ed;
+ color:#16803c;
+ padding:13px;
+ border-radius:10px;
+ margin:10px 0;
+ text-align:center;
+}
+
+.err{
+ background:#ffe9e9;
+ color:#c62828;
+ padding:13px;
+ border-radius:10px;
+ margin:10px 0;
+ text-align:center;
+}
+
+.status{
+ text-align:center;
+ padding:12px;
+ border-radius:12px;
+ background:#eef3ff;
+ margin:12px 0;
+ font-weight:bold;
+}
+
+.amount{
+ font-size:30px;
+ font-weight:bold;
+ text-align:center;
+ color:#2864df;
+ margin:20px;
+}
+
+.flow{
+ padding:12px;
+ margin:7px 0;
+ background:#f7f9ff;
+ border-left:5px solid #2864df;
+ border-radius:9px;
+}
+
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ height:68px;
+ background:white;
+ box-shadow:0 -3px 15px #0002;
+ display:flex;
+ z-index:1000;
+}
+
+.bottom button{
+ flex:1;
+ background:white;
+ color:#475467;
+ margin:0;
+ padding:6px 2px;
+ font-size:11px;
+ border-radius:0;
+}
+
+.bottom span{
+ display:block;
+ font-size:22px;
+ margin-bottom:3px;
+}
+
+hr{
+ border:0;
+ border-top:1px solid #e5e9f2;
+ margin:20px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home" class="card">
+
+<h1>🚀 SkillConnect</h1>
+
+<p style="text-align:center;font-size:18px">
+Find trusted skilled workers near you
+</p>
+
+<div class="demo"
+style="background:#fff7d6;padding:16px;border-radius:15px;text-align:center">
+<b>SIH 2026 • PS SIH26089</b><br><br>
+Cooperative Gig Services Platform
+</div>
+
+<button onclick="showPage('login')">
+🔐 Login
+</button>
+
+<button class="back" onclick="showPage('register')">
+📝 Create Account
+</button>
+
+<h2>Prototype Flow</h2>
+
+<div class="flow">1️⃣ Customer Login</div>
+<div class="flow">2️⃣ Select Service</div>
+<div class="flow">3️⃣ Book Worker</div>
+<div class="flow">4️⃣ Worker Gets Request</div>
+<div class="flow">5️⃣ Worker Accepts</div>
+<div class="flow">6️⃣ Customer Pays</div>
+<div class="flow">7️⃣ Booking Confirmed</div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login" class="card hide">
+
+<h1>Welcome Back 👋</h1>
+
+<p style="text-align:center">
+Login to SkillConnect
+</p>
+
+<input id="loginEmail"
+placeholder="Email">
+
+<input id="loginPassword"
+type="password"
+placeholder="Password">
+
+<select id="loginRole">
+<option value="Customer">👤 Customer</option>
+<option value="Worker">👷 Worker</option>
+</select>
+
+<button onclick="login()">
+🔐 Login
+</button>
+
+<div id="loginMsg"></div>
+
+<button class="back" onclick="showPage('register')">
+📝 Create Account
+</button>
+
+<button class="back" onclick="showPage('home')">
+← Back
+</button>
+
+</section>
+
+
+<!-- REGISTER -->
+<section id="register" class="card hide">
+
+<h1>Create Account 📝</h1>
+
+<p style="text-align:center">
+Join SkillConnect
+</p>
+
+<h3>Account Type</h3>
+
+<div class="role">
+
+<button id="customerRole"
+class="active"
+onclick="setRole('Customer')">
+👤 Customer
+</button>
+
+<button id="workerRole"
+class="inactive"
+onclick="setRole('Worker')">
+👷 Worker
+</button>
+
+</div>
+
+<input id="regName"
+placeholder="Full Name">
+
+<input id="regEmail"
+placeholder="Email">
+
+<input id="regMobile"
+placeholder="Mobile Number">
+
+<input id="regPassword"
+type="password"
+placeholder="Create Password">
+
+<div id="workerFields" class="hide">
+
+<label><b>Your Skill</b></label>
+
+<select id="regSkill">
+<option value="">Select Skill</option>
+<option>Electrician</option>
+<option>Plumber</option>
+<option>Carpenter</option>
+<option>Painter</option>
+<option>Mechanic</option>
+<option>Barber</option>
+<option>AC Technician</option>
+<option>Home Tutor</option>
+<option>Mobile Repair</option>
+<option>Mason</option>
+<option>DTH Technician</option>
+<option>Labour</option>
+</select>
+
+<input id="regLocation"
+placeholder="City / Area">
+
+</div>
+
+<button onclick="createAccount()">
+✅ Create Account
+</button>
+
+<div id="registerMsg"></div>
+
+<button class="back" onclick="showPage('login')">
+Already have account? Login
+</button>
+
+<button class="back" onclick="showPage('home')">
+← Back
+</button>
+
+</section>
+<!-- CUSTOMER DASHBOARD -->
+<section id="customer" class="card hide">
+
+<h1>SkillConnect 🔎</h1>
+
+<div class="ok">
+Welcome, <b id="customerName">Anshu Kumar</b> 👋
+</div>
+
+<h2>Choose Service</h2>
+
+<div class="category-grid">
+
+<div class="category" onclick="selectService('Electrician')">
+<span>⚡</span>Electrician
+</div>
+
+<div class="category" onclick="selectService('Plumber')">
+<span>🔧</span>Plumber
+</div>
+
+<div class="category" onclick="selectService('Carpenter')">
+<span>🪚</span>Carpenter
+</div>
+
+<div class="category" onclick="selectService('Painter')">
+<span>🎨</span>Painter
+</div>
+
+<div class="category" onclick="selectService('Mechanic')">
+<span>🔩</span>Mechanic
+</div>
+
+<div class="category" onclick="selectService('Barber')">
+<span>💈</span>Barber
+</div>
+
+<div class="category" onclick="selectService('AC Technician')">
+<span>❄️</span>AC Technician
+</div>
+
+<div class="category" onclick="selectService('Home Tutor')">
+<span>📚</span>Home Tutor
+</div>
+
+<div class="category" onclick="selectService('Mobile Repair')">
+<span>📱</span>Mobile Repair
+</div>
+
+<div class="category" onclick="selectService('Mason')">
+<span>🧱</span>Mason
+</div>
+
+<div class="category" onclick="selectService('DTH Technician')">
+<span>📡</span>DTH Technician
+</div>
+
+<div class="category" onclick="selectService('Labour')">
+<span>👷</span>Labour
+</div>
+
+</div>
+
+<h2>Available Workers 👷</h2>
+
+<div id="workers">
+<p style="text-align:center">
+Select a service above.
+</p>
+</div>
+
+<hr>
+
+<h2>My Bookings 📋</h2>
+
+<div id="myBookings">
+<p style="text-align:center">
+No bookings yet.
+</p>
+</div>
+
+<button onclick="showPage('track')">
+📍 Track Booking
+</button>
+
+<button class="back" onclick="showPage('profile')">
+👤 My Profile
+</button>
+
+<button class="back" onclick="showPage('settings')">
+⚙️ Settings
+</button>
+
+<button class="danger" onclick="logout()">
+Logout
+</button>
+
+</section>
+
+
+<!-- BOOKING -->
+<section id="booking" class="card hide">
+
+<h1>Book Service 📅</h1>
+
+<div id="bookingWorker"></div>
+
+<label><b>Service Location</b></label>
+
+<input id="serviceLocation"
+placeholder="Enter address / area">
+
+<label><b>Problem</b></label>
+
+<textarea id="problem"
+placeholder="Describe your problem"></textarea>
+
+<label><b>Date</b></label>
+
+<input id="bookingDate"
+type="date">
+
+<label><b>Estimated Amount</b></label>
+
+<input id="amount"
+type="number"
+value="500"
+placeholder="Amount ₹">
+
+<button onclick="sendBooking()">
+📩 Send Booking Request
+</button>
+
+<div id="bookingMsg"></div>
+
+<button class="back" onclick="showPage('customer')">
+← Back to Search
+</button>
+
+</section>
+
+
+<!-- WORKER DASHBOARD -->
+<section id="worker" class="card hide">
+
+<h1>Worker Dashboard 👷</h1>
+
+<div class="ok">
+
+Welcome,
+<b id="workerName">Ravi Kumar</b>
+👋
+
+<br><br>
+
+⚒️ <span id="workerSkill">Electrician</span>
+
+<br><br>
+
+📍 <span id="workerLocation">Supaul</span>
+
+</div>
+
+<h2>Booking Requests 📩</h2>
+
+<div id="workerRequest">
+
+<p style="text-align:center">
+No booking requests yet.
+</p>
+
+</div>
+
+<button class="back" onclick="showPage('profile')">
+👤 My Profile
+</button>
+
+<button class="danger" onclick="logout()">
+Logout
+</button>
+
+</section>
+
+
+<!-- PAYMENT -->
+<section id="payment" class="card hide">
+
+<h1>Payment 💳</h1>
+
+<div class="ok">
+✅ Worker accepted your booking!
+</div>
+
+<div id="paymentDetails"></div>
+
+<div class="amount" id="paymentAmount">
+₹500
+</div>
+
+<p style="text-align:center">
+Secure payment simulation for SIH prototype
+</p>
+
+<button class="success" onclick="payNow()">
+💳 Pay Now
+</button>
+
+<button class="back" onclick="showPage('customer')">
+Cancel
+</button>
+
+</section>
+
+
+<!-- SUCCESS -->
+<section id="success" class="card hide">
+
+<h1>🎉 Booking Confirmed!</h1>
+
+<div class="ok">
+
+<h2>Payment Successful ✅</h2>
+
+<p style="text-align:center">
+Your service booking has been confirmed.
+</p>
+
+</div>
+
+<div id="successDetails"></div>
+
+<button onclick="showPage('track')">
+📍 Track Booking
+</button>
+
+<button onclick="showPage('customer')">
+🏠 Customer Dashboard
+</button>
+
+</section>
+
+
+<!-- TRACK -->
+<section id="track" class="card hide">
+
+<h1>📍 Track Booking</h1>
+
+<div id="trackBox">
+
+<p style="text-align:center">
+No active booking.
+</p>
+
+</div>
+
+<button class="back" onclick="showPage('customer')">
+← Customer Dashboard
+</button>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="card hide">
+
+<h1>👤 My Profile</h1>
+
+<div class="worker">
+
+<p><b>Name:</b> <span id="profileName">Anshu Kumar</span></p>
+
+<p><b>Email:</b> <span id="profileEmail">demo@gmail.com</span></p>
+
+<p><b>Mobile:</b> <span id="profileMobile">8757999643</span></p>
+
+<p><b>Role:</b> <span id="profileRole">Customer</span></p>
+
+</div>
+
+<button class="back" onclick="showPage('customer')">
+← Back
+</button>
+
+</section>
+
+
+<!-- SETTINGS -->
+<section id="settings" class="card hide">
+
+<h1>⚙️ Settings</h1>
+
+<button onclick="demoAlert('Notification settings opened 🔔')">
+🔔 Notifications
+</button>
+
+<button onclick="demoAlert('Location settings opened 📍')">
+📍 Location
+</button>
+
+<button onclick="demoAlert('Help & Support opened 💬')">
+💬 Help & Support
+</button>
+
+<button onclick="demoAlert('About SkillConnect opened ℹ️')">
+ℹ️ About SkillConnect
+</button>
+
+<button class="back" onclick="showPage('customer')">
+← Back
+</button>
+
+</section>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<div class="bottom">
+
+<button onclick="showPage('home')">
+<span>🏠</span>
+Home
+</button>
+
+<button onclick="showPage('customer')">
+<span>🤖</span>
+AI
+</button>
+
+<button onclick="showPage('customer')">
+<span>📚</span>
+Learn
+</button>
+
+<button onclick="showPage('profile')">
+<span>👤</span>
+Account
+</button>
+
+</div>
+<script>
+
+let accountRole = "Customer";
+
+let currentUser = {
+  name:"Anshu Kumar",
+  email:"demo@gmail.com",
+  mobile:"8757999643",
+  role:"Customer"
+};
+
+let selectedService = "";
+let selectedWorker = null;
+let bookingData = null;
+
+
+/* ================= WORKERS ================= */
+
+const workers = {
+
+"Electrician":{
+ name:"Ravi Kumar",
+ skill:"Electrician",
+ location:"Supaul",
+ mobile:"9876500001"
+},
+
+"Plumber":{
+ name:"Amit Kumar",
+ skill:"Plumber",
+ location:"Supaul",
+ mobile:"9876500002"
+},
+
+"Carpenter":{
+ name:"Rakesh Kumar",
+ skill:"Carpenter",
+ location:"Patna",
+ mobile:"9876500003"
+},
+
+"Painter":{
+ name:"Sanjay Kumar",
+ skill:"Painter",
+ location:"Darbhanga",
+ mobile:"9876500004"
+},
+
+"Mechanic":{
+ name:"Vikas Kumar",
+ skill:"Mechanic",
+ location:"Saharsa",
+ mobile:"9876500005"
+},
+
+"Barber":{
+ name:"Manoj Kumar",
+ skill:"Barber",
+ location:"Supaul",
+ mobile:"9876500006"
+},
+
+"AC Technician":{
+ name:"Deepak Kumar",
+ skill:"AC Technician",
+ location:"Patna",
+ mobile:"9876500007"
+},
+
+"Home Tutor":{
+ name:"Neha Kumari",
+ skill:"Home Tutor",
+ location:"Darbhanga",
+ mobile:"9876500008"
+},
+
+"Mobile Repair":{
+ name:"Rahul Kumar",
+ skill:"Mobile Repair",
+ location:"Saharsa",
+ mobile:"9876500009"
+},
+
+"Mason":{
+ name:"Pankaj Kumar",
+ skill:"Mason",
+ location:"Supaul",
+ mobile:"9876500010"
+},
+
+"DTH Technician":{
+ name:"Sunil Kumar",
+ skill:"DTH Technician",
+ location:"Supaul",
+ mobile:"9876500011"
+},
+
+"Labour":{
+ name:"Raj Kumar",
+ skill:"Labour",
+ location:"Supaul",
+ mobile:"9876500012"
+}
+
+};
+
+
+/* ================= PAGE ================= */
+
+function showPage(id){
+
+document.querySelectorAll("section").forEach(function(x){
+x.classList.add("hide");
+});
+
+let page = document.getElementById(id);
+
+if(page){
+page.classList.remove("hide");
+}
+
+window.scrollTo(0,0);
+
+}
+
+
+/* ================= ROLE ================= */
+
+function setRole(role){
+
+accountRole = role;
+
+let customer = document.getElementById("customerRole");
+let worker = document.getElementById("workerRole");
+let fields = document.getElementById("workerFields");
+
+if(role === "Customer"){
+
+customer.className = "active";
+worker.className = "inactive";
+fields.classList.add("hide");
+
+}else{
+
+worker.className = "active";
+customer.className = "inactive";
+fields.classList.remove("hide");
+
+}
+
+}
+
+
+/* ================= CREATE ACCOUNT ================= */
+
+function createAccount(){
+
+let name = document.getElementById("regName").value.trim();
+let email = document.getElementById("regEmail").value.trim();
+let mobile = document.getElementById("regMobile").value.trim();
+let password = document.getElementById("regPassword").value.trim();
+
+if(!name || !email || !mobile || !password){
+
+document.getElementById("registerMsg").innerHTML =
+"<div class='err'>Please fill all details.</div>";
+
+return;
+
+}
+
+if(password.length < 4){
+
+document.getElementById("registerMsg").innerHTML =
+"<div class='err'>Password must be at least 4 characters.</div>";
+
+return;
+
+}
+
+
+/* WORKER */
+
+if(accountRole === "Worker"){
+
+let skill = document.getElementById("regSkill").value;
+
+let location = document.getElementById("regLocation").value.trim();
+
+if(!skill || !location){
+
+document.getElementById("registerMsg").innerHTML =
+"<div class='err'>Please select skill and location.</div>";
+
+return;
+
+}
+
+currentUser = {
+
+name:name,
+email:email,
+mobile:mobile,
+role:"Worker",
+skill:skill,
+location:location
+
+};
+
+localStorage.setItem(
+"skillconnectUser",
+JSON.stringify(currentUser)
+);
+
+updateWorkerProfile();
+
+document.getElementById("registerMsg").innerHTML =
+"<div class='ok'>Worker account created successfully 🎉</div>";
+
+setTimeout(function(){
+
+showPage("worker");
+
+loadWorkerRequest();
+
+},500);
+
+return;
+
+}
+
+
+/* CUSTOMER */
+
+currentUser = {
+
+name:name,
+email:email,
+mobile:mobile,
+role:"Customer"
+
+};
+
+localStorage.setItem(
+"skillconnectUser",
+JSON.stringify(currentUser)
+);
+
+updateCustomerProfile();
+
+document.getElementById("registerMsg").innerHTML =
+"<div class='ok'>Customer account created successfully 🎉</div>";
+
+setTimeout(function(){
+
+showPage("customer");
+
+},500);
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function login(){
+
+let email =
+document.getElementById("loginEmail").value.trim();
+
+let password =
+document.getElementById("loginPassword").value.trim();
+
+let role =
+document.getElementById("loginRole").value;
+
+if(!email || !password){
+
+document.getElementById("loginMsg").innerHTML =
+"<div class='err'>Enter email and password.</div>";
+
+return;
+
+}
+
+
+/* CUSTOMER LOGIN */
+
+if(role === "Customer"){
+
+currentUser = {
+
+name:"Anshu Kumar",
+email:email,
+mobile:"8757999643",
+role:"Customer"
+
+};
+
+localStorage.setItem(
+"skillconnectUser",
+JSON.stringify(currentUser)
+);
+
+updateCustomerProfile();
+
+showPage("customer");
+
+return;
+
+}
+
+
+/* WORKER LOGIN */
+
+currentUser = {
+
+name:"Ravi Kumar",
+email:email,
+mobile:"9876500001",
+role:"Worker",
+skill:"Electrician",
+location:"Supaul"
+
+};
+
+localStorage.setItem(
+"skillconnectUser",
+JSON.stringify(currentUser)
+);
+
+updateWorkerProfile();
+
+loadWorkerRequest();
+
+showPage("worker");
+
+}
+
+
+/* ================= CUSTOMER PROFILE ================= */
+
+function updateCustomerProfile(){
+
+let x = document.getElementById("customerName");
+
+if(x){
+x.innerText = currentUser.name;
+}
+
+document.getElementById("profileName").innerText =
+currentUser.name;
+
+document.getElementById("profileEmail").innerText =
+currentUser.email;
+
+document.getElementById("profileMobile").innerText =
+currentUser.mobile;
+
+document.getElementById("profileRole").innerText =
+"Customer";
+
+}
+
+
+/* ================= WORKER PROFILE ================= */
+
+function updateWorkerProfile(){
+
+document.getElementById("workerName").innerText =
+currentUser.name;
+
+document.getElementById("workerSkill").innerText =
+currentUser.skill || "Electrician";
+
+document.getElementById("workerLocation").innerText =
+currentUser.location || "Supaul";
+
+document.getElementById("profileName").innerText =
+currentUser.name;
+
+document.getElementById("profileEmail").innerText =
+currentUser.email;
+
+document.getElementById("profileMobile").innerText =
+currentUser.mobile;
+
+document.getElementById("profileRole").innerText =
+"Worker";
+
+}
+
+
+/* ================= SELECT SERVICE ================= */
+
+function selectService(service){
+
+selectedService = service;
+
+selectedWorker = workers[service];
+
+let w = selectedWorker;
+
+document.getElementById("workers").innerHTML = `
+
+<div class="worker">
+
+<h3>👷 ${w.name}</h3>
+
+<p>⚒️ <b>${w.skill}</b></p>
+
+<p>📍 ${w.location}</p>
+
+<p>📞 ${w.mobile}</p>
+
+<p>
+<span class="badge">
+✓ Verified & Available
+</span>
+</p>
+
+<button onclick="openBooking()">
+📅 Book Service
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= BOOKING PAGE ================= */
+
+function openBooking(){
+
+if(!selectedWorker){
+
+alert("Please select a worker first.");
+
+return;
+
+}
+
+let w = selectedWorker;
+
+document.getElementById("bookingWorker").innerHTML = `
+
+<div class="worker">
+
+<h3>👷 ${w.name}</h3>
+
+<p>⚒️ ${w.skill}</p>
+
+<p>📍 ${w.location}</p>
+
+<p>📞 ${w.mobile}</p>
+
+<span class="badge">
+✓ Verified Worker
+</span>
+
+</div>
+
+`;
+
+document.getElementById("serviceLocation").value = "";
+document.getElementById("problem").value = "";
+document.getElementById("bookingDate").value = "";
+document.getElementById("amount").value = "500";
+document.getElementById("bookingMsg").innerHTML = "";
+
+showPage("booking");
+
+}
+
+
+/* ================= SEND BOOKING ================= */
+
+function sendBooking(){
+
+if(!selectedWorker){
+
+alert("Please select worker.");
+
+return;
+
+}
+
+let location =
+document.getElementById("serviceLocation").value.trim();
+
+let problem =
+document.getElementById("problem").value.trim();
+
+let date =
+document.getElementById("bookingDate").value;
+
+let amount =
+Number(document.getElementById("amount").value);
+
+if(!location || !problem || !date || !amount){
+
+document.getElementById("bookingMsg").innerHTML =
+"<div class='err'>Please fill all booking details.</div>";
+
+return;
+
+}
+
+bookingData = {
+
+customer:currentUser.name,
+mobile:currentUser.mobile,
+
+worker:selectedWorker.name,
+skill:selectedWorker.skill,
+
+location:location,
+problem:problem,
+date:date,
+amount:amount,
+
+status:"Pending"
+
+};
+
+localStorage.setItem(
+"skillconnectBooking",
+JSON.stringify(bookingData)
+);
+
+document.getElementById("bookingMsg").innerHTML = `
+
+<div class="ok">
+
+Booking request sent to
+<b>${selectedWorker.name}</b> 📩
+
+</div>
+
+`;
+
+setTimeout(function(){
+
+loadWorkerRequest();
+
+showPage("worker");
+
+},700);
+
+}
+
+
+/* ================= WORKER REQUEST ================= */
+
+function loadWorkerRequest(){
+
+let saved =
+localStorage.getItem("skillconnectBooking");
+
+let box =
+document.getElementById("workerRequest");
+
+if(!box) return;
+
+if(!saved){
+
+box.innerHTML =
+"<p style='text-align:center'>No booking requests yet.</p>";
+
+return;
+
+}
+
+bookingData = JSON.parse(saved);
+
+let d = bookingData;
+
+
+/* PAID */
+
+if(d.status === "Paid"){
+
+box.innerHTML = `
+
+<div class="ok">
+
+✅ Booking completed<br>
+💰 Payment received
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+/* REJECTED */
+
+if(d.status === "Rejected"){
+
+box.innerHTML = `
+
+<div class="err">
+
+❌ Booking request rejected.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+/* REQUEST */
+
+box.innerHTML = `
+
+<div class="booking">
+
+<h3>📩 New Booking Request</h3>
+
+<p>
+👤 Customer:
+<b>${d.customer}</b>
+</p>
+
+<p>📞 ${d.mobile}</p>
+
+<p>
+⚒️ Service:
+<b>${d.skill}</b>
+</p>
+
+<p>📍 ${d.location}</p>
+
+<p>🛠️ ${d.problem}</p>
+
+<p>📅 ${d.date}</p>
+
+<p>
+💰 Amount:
+<b>₹${d.amount}</b>
+</p>
+
+<div class="status">
+Status: ${d.status}
+</div>
+
+<button class="success"
+onclick="acceptBooking()">
+
+✅ Accept Booking
+
+</button>
+
+<button class="danger"
+onclick="rejectBooking()">
+
+❌ Reject Booking
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= ACCEPT ================= */
+
+function acceptBooking(){
+
+if(!bookingData){
+
+return;
+
+}
+
+bookingData.status = "Accepted";
+
+localStorage.setItem(
+"skillconnectBooking",
+JSON.stringify(bookingData)
+);
+
+document.getElementById("paymentDetails").innerHTML = `
+
+<div class="booking">
+
+<p>
+👤 Customer:
+<b>${bookingData.customer}</b>
+</p>
+
+<p>
+👷 Worker:
+<b>${bookingData.worker}</b>
+</p>
+
+<p>
+⚒️ Service:
+<b>${bookingData.skill}</b>
+</p>
+
+<p>
+📍 ${bookingData.location}
+</p>
+
+<p>
+📅 ${bookingData.date}
+</p>
+
+</div>
+
+`;
+
+document.getElementById("paymentAmount").innerText =
+"₹" + bookingData.amount;
+
+showPage("payment");
+
+}
+
+
+/* ================= REJECT ================= */
+
+function rejectBooking(){
+
+if(!bookingData){
+
+return;
+
+}
+
+bookingData.status = "Rejected";
+
+localStorage.setItem(
+"skillconnectBooking",
+JSON.stringify(bookingData)
+);
+
+loadWorkerRequest();
+
+}
+
+
+/* ================= PAYMENT ================= */
+
+function payNow(){
+
+if(!bookingData){
+
+return;
+
+}
+
+bookingData.status = "Paid";
+
+localStorage.setItem(
+"skillconnectBooking",
+JSON.stringify(bookingData)
+);
+
+document.getElementById("successDetails").innerHTML = `
+
+<div class="booking">
+
+<p>
+👷 Worker:
+<b>${bookingData.worker}</b>
+</p>
+
+<p>
+⚒️ Service:
+<b>${bookingData.skill}</b>
+</p>
+
+<p>
+📅 Date:
+${bookingData.date}
+</p>
+
+<p>
+💰 Paid:
+<b>₹${bookingData.amount}</b>
+</p>
+
+<p>
+📍 ${bookingData.location}
+</p>
+
+</div>
+
+`;
+
+updateMyBookings();
+
+showPage("success");
+
+}
+
+
+/* ================= MY BOOKINGS ================= */
+
+function updateMyBookings(){
+
+let box =
+document.getElementById("myBookings");
+
+let saved =
+localStorage.getItem("skillconnectBooking");
+
+if(!saved){
+
+box.innerHTML =
+"<p style='text-align:center'>No bookings yet.</p>";
+
+return;
+
+}
+
+let d = JSON.parse(saved);
+
+box.innerHTML = `
+
+<div class="booking">
+
+<h3>🛠️ ${d.skill}</h3>
+
+<p>
+👷 Worker:
+<b>${d.worker}</b>
+</p>
+
+<p>
+📍 ${d.location}
+</p>
+
+<p>
+📅 ${d.date}
+</p>
+
+<p>
+💰 ₹${d.amount}
+</p>
+
+<div class="status">
+Status: ${d.status}
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= TRACK ================= */
+
+function loadTrack(){
+
+let box =
+document.getElementById("trackBox");
+
+let saved =
+localStorage.getItem("skillconnectBooking");
+
+if(!saved){
+
+box.innerHTML =
+"<p style='text-align:center'>No active booking.</p>";
+
+return;
+
+}
+
+let d = JSON.parse(saved);
+
+let statusText = "Booking Requested 📩";
+
+if(d.status === "Accepted"){
+statusText = "Worker Accepted ✅";
+}
+
+if(d.status === "Paid"){
+statusText = "Payment Successful 💳";
+}
+
+if(d.status === "Rejected"){
+statusText = "Booking Rejected ❌";
+}
+
+box.innerHTML = `
+
+<div class="booking">
+
+<h2>${statusText}</h2>
+
+<p>
+👷 Worker:
+<b>${d.worker}</b>
+</p>
+
+<p>
+⚒️ Service:
+<b>${d.skill}</b>
+</p>
+
+<p>
+📍 ${d.location}
+</p>
+
+<p>
+📅 ${d.date}
+</p>
+
+<hr>
+
+<div class="flow">
+1️⃣ Booking Requested
+</div>
+
+<div class="flow">
+2️⃣ Worker Response
+</div>
+
+<div class="flow">
+3️⃣ Payment
+</div>
+
+<div class="flow">
+4️⃣ Service Confirmed
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ================= DEMO ALERT ================= */
+
+function demoAlert(text){
+
+alert(text);
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+
+localStorage.removeItem("skillconnectUser");
+
+currentUser = {
+name:"Anshu Kumar",
+email:"demo@gmail.com",
+mobile:"8757999643",
+role:"Customer"
+};
+
+showPage("home");
+
+}
+
+
+/* ================= TRACK BUTTON FIX ================= */
+
+document.addEventListener("click",function(e){
+
+if(e.target && e.target.innerText.includes("Track Booking")){
+
+setTimeout(function(){
+
+loadTrack();
+
+},50);
+
+}
+
+});
+
+
+/* ================= START ================= */
+
+let savedUser =
+localStorage.getItem("skillconnectUser");
+
+if(savedUser){
+
+try{
+
+currentUser = JSON.parse(savedUser);
+
+if(currentUser.role === "Worker"){
+
+updateWorkerProfile();
+showPage("worker");
+loadWorkerRequest();
+
+}else{
+
+updateCustomerProfile();
+showPage("customer");
+updateMyBookings();
+
+}
+
+}catch(e){
+
+showPage("home");
+
+}
+
+}else{
+
+showPage("home");
+
+}
+
+</script>
